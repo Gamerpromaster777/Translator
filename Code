@@ -1,0 +1,57 @@
+import flet as ft
+
+def main(page):
+    page.title = "The best Gus Fringe Quote Translator"
+    
+    
+    translations = {
+        "English": "A dog who bites every owner he's had can only be disciplined with a firm hand or... put down. (Gus Fring)",
+        "Spanish": "Un perro que muerde a cada dueño que ha tenido sólo puede ser disciplinado con mano firme o... sacrificado. (Gus)",
+        "French": "Un chien qui mord chaque propriétaire qu'il a eu ne peut être discipliné qu'avec une main ferme ou... euthanasié. (Gus)",
+        "Portuguese": "Um cachorro que morde todos os donos que já teve só pode ser disciplinado com mão firme ou... sacrificado. (Gus)"
+    }
+    
+    # Display the English quote because english is better
+    display = ft.Text(translations["English"], size=16)
+    
+#image
+    gus_image = ft.Image(
+        src="https://wegotthiscovered.com/wp-content/uploads/2023/06/gus-breaking-bad.png",
+        width=200,
+        height=200
+    )
+    
+#language
+    def change(e):
+        display.value = translations[e.control.value]
+        page.update()
+    
+    language = ft.RadioGroup(
+        content=ft.Column([
+            ft.Radio(value="English", label="English"),
+            ft.Radio(value="Spanish", label="Spanish"), 
+            ft.Radio(value="French", label="French"),
+            ft.Radio(value="Portuguese", label="Portuguese")
+        ]),
+        value="English",
+        on_change=change
+    )
+    
+    # Put everything on the page
+    page.add(
+        ft.Text("Gus Fring's Famous Quote:", weight="bold", size=20),
+        gus_image,
+        display,
+        ft.Text("Choose language:"),
+        language
+    )
+
+ft.app(target=main)
+
+'''Thanks to the following websites:
+https://flet.dev/docs/controls/image/
+https://flet.dev/docs/controls/radio/
+https://flet.dev/docs/controls/image/
+https://flet.dev/docs/controls/text/ 
+https://flet.dev/docs/controls/textfield/#multiline-textfields 
+'''
